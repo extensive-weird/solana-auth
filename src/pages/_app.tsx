@@ -1,9 +1,22 @@
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
 
-import 'styles/globals.css'
+import {
+  MoralisProvider,
+  MoralisProviderInitializedProps,
+} from "react-moralis";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+import "styles/globals.css";
 
-export default MyApp
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  return (
+    // @ts-ignore
+    <MoralisProvider
+      appId={process.env.NEXT_PUBLIC_APP_ID}
+      serverUrl={process.env.NEXT_PUBLIC_SERVER_URL}
+    >
+      <Component {...pageProps} />
+    </MoralisProvider>
+  );
+};
+
+export default MyApp;
